@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "Max Square";
+}
+
+<div class="text-center">
+    <h1 class="display-4">My Max Square Calculator</h1>
+</div>
+
+<div class="text-center">
+    <form asp-controller="MaxSquare" asp-action="MaxSquare" method="POST">
+        <input type="text" placeholder="First Number" name="firstnumber"/>
+        <input type="text" placeholder="Second Number" name="secondnumber"/>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+@{
+    if(ViewBag.NumberOneSqrt != null && ViewBag.NumberTwoSqrt != null) {
+        if(ViewBag.NumberOneSqrt > ViewBag.NumberTwoSqrt) {
+            <div class="text-center">
+                <p>The number @ViewBag.numberOne with square root @ViewBag.NumberOneSqrt has a higher square root than the number @ViewBag.numberTwo with square root @ViewBag.NumberTwoSqrt.</p>
+            </div>
+        } else if (ViewBag.NumberOneSqrt < ViewBag.NumberTwoSqrt) {
+            <div class="text-center">
+                <p>The number @ViewBag.numberTwo with square root @ViewBag.NumberTwoSqrt has a higher square root than the number @ViewBag.numberOne with square root @ViewBag.NumberOneSqrt.</p>
+            </div>
+        } else if (ViewBag.NumberOneSqrt == ViewBag.NumberTwoSqrt) {
+            <div class="text-center">
+                <p>The numbers are equal! Please enter another pair of numbers.</p>
+            </div>
+        } else if (ViewBag.NumberOne < 0 || ViewBag.NumberTwo < 0) {
+            <div class="text-center">
+                <p>Negative input detected! You can only find the square root of positive numbers. Please enter another pair of numbers.</p>
+            </div>
+        }
+    } else if (ViewBag.Error != null) {
+        <div class="text-center">
+            <p>@ViewBag.Error</p>
+        </div>
+    }
+}
